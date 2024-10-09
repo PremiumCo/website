@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, useCallback } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
 
 import { cn } from "@/src/app/lib/utils";
@@ -10,7 +10,7 @@ interface GridPatternProps {
   height?: number;
   x?: number;
   y?: number;
-  strokeDasharray?: any;
+  strokeDasharray?: string | number; // Specify type for strokeDasharray
   numSquares?: number;
   className?: string;
   maxOpacity?: number;
@@ -18,7 +18,7 @@ interface GridPatternProps {
 }
 
 // Function to get random position for squares
-function getPos(dimensions, width, height) {
+function getPos(dimensions: { width: number; height: number }, width: number, height: number) {
   return [
     Math.floor((Math.random() * dimensions.width) / width),
     Math.floor((Math.random() * dimensions.height) / height),
@@ -26,7 +26,7 @@ function getPos(dimensions, width, height) {
 }
 
 // Function to generate squares
-const generateSquares = (count, dimensions, width, height) => {
+const generateSquares = (count: number, dimensions: { width: number; height: number }, width: number, height: number) => {
   return Array.from({ length: count }, (_, i) => ({
     id: i,
     pos: getPos(dimensions, width, height),
