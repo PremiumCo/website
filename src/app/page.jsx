@@ -1,9 +1,16 @@
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useSession, signOut } from 'next-auth/react'
-import { Dialog, DialogPanel } from '@headlessui/react'
-import { Bars3Icon, XMarkIcon, ArrowPathIcon, CloudArrowUpIcon, FingerPrintIcon, LockClosedIcon } from '@heroicons/react/24/outline'
+import { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { Dialog, DialogPanel } from "@headlessui/react";
+import {
+  Bars3Icon,
+  XMarkIcon,
+  ArrowPathIcon,
+  CloudArrowUpIcon,
+  FingerPrintIcon,
+  LockClosedIcon,
+} from "@heroicons/react/24/outline";
 import AnimatedGridPattern from "./components/ui/animated-grid-pattern";
 import {
   DropdownMenu,
@@ -12,47 +19,27 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "./components/ui/dropdown-menu"
+} from "./components/ui/dropdown-menu";
 import { cn } from "./lib/utils";
 
 const navigation = [
-  { name: 'Home', href: '#' },
-  { name: 'Careers', href: '#' },
-  { name: 'Products', href: '#' },
-  { name: 'Company', href: '#' },
-]
-
-const features = [
-  {
-    name: 'Feature 1',
-    description: 'Description of feature 1',
-    icon: CloudArrowUpIcon,
-  },
-  {
-    name: 'Feature 2',
-    description: 'Description of feature 2',
-    icon: LockClosedIcon,
-  },
-  {
-    name: 'Feature 3',
-    description: 'Description of feature 3',
-    icon: ArrowPathIcon,
-  },
-  {
-    name: 'Feature 4',
-    description: 'Description of feature 4',
-    icon: FingerPrintIcon,
-  },
-]
+  { name: "Home", href: "#" },
+  { name: "Careers", href: "#" },
+  { name: "Products", href: "#" },
+  { name: "Company", href: "#" },
+];
 
 export default function Example() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { data: session } = useSession() // Use NextAuth session
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { data: session } = useSession(); // Use NextAuth session
 
   return (
     <div className="bg-gray relative">
-<header className="absolute inset-x-0 top-0 z-50">
-        <nav aria-label="Global" className="flex items-center justify-between p-6 lg:px-8">
+      <header className="absolute inset-x-0 top-0 z-50">
+        <nav
+          aria-label="Global"
+          className="flex items-center justify-between p-6 lg:px-8"
+        >
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
               <span className="sr-only">Your Company</span>
@@ -75,7 +62,11 @@ export default function Example() {
           </div>
           <div className="hidden lg:flex lg:gap-x-12">
             {navigation.map((item) => (
-              <a key={item.name} href={item.href} className="text-sm font-semibold leading-6 text-white-900">
+              <a
+                key={item.name}
+                href={item.href}
+                className="text-sm font-semibold leading-6 text-white-900"
+              >
                 {item.name}
               </a>
             ))}
@@ -84,7 +75,11 @@ export default function Example() {
             {session ? (
               <DropdownMenu>
                 <DropdownMenuTrigger>
-                  <img src={session.user.image} alt="User Profile" className="h-9 w-9 rounded-full cursor-pointer" />
+                  <img
+                    src={session.user.image}
+                    alt="User Profile"
+                    className="h-9 w-9 rounded-full cursor-pointer"
+                  />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -94,17 +89,26 @@ export default function Example() {
                   <DropdownMenuItem>Team</DropdownMenuItem>
                   <DropdownMenuItem>Subscription</DropdownMenuItem>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => signOut()}>
+                    Logout
+                  </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <a href="/login" className="text-sm font-semibold leading-6 text-white-900">
+              <a
+                href="/login"
+                className="text-sm font-semibold leading-6 text-white-900"
+              >
                 Log in <span aria-hidden="true">&rarr;</span>
               </a>
             )}
           </div>
         </nav>
-        <Dialog open={mobileMenuOpen} onClose={setMobileMenuOpen} className="lg:hidden">
+        <Dialog
+          open={mobileMenuOpen}
+          onClose={setMobileMenuOpen}
+          className="lg:hidden"
+        >
           <div className="fixed inset-0 z-50" />
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
@@ -142,7 +146,11 @@ export default function Example() {
                   {session ? (
                     <DropdownMenu>
                       <DropdownMenuTrigger>
-                        <img src={session.user.image} alt="User Profile" className="h-6 w-6 rounded-full" />
+                        <img
+                          src={session.user.image}
+                          alt="User Profile"
+                          className="h-6 w-6 rounded-full"
+                        />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -152,7 +160,9 @@ export default function Example() {
                         <DropdownMenuItem>Team</DropdownMenuItem>
                         <DropdownMenuItem>Subscription</DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem onClick={() => signOut()}>Logout</DropdownMenuItem>
+                        <DropdownMenuItem onClick={() => signOut()}>
+                          Logout
+                        </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : (
@@ -178,7 +188,7 @@ export default function Example() {
           <div
             style={{
               clipPath:
-                'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
             }}
             className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
           />
@@ -197,18 +207,19 @@ export default function Example() {
         />
 
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 relative z-10">
-          <div className="hidden sm:mb-8 sm:flex sm:justify-center">
-          </div>
+          <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center">
             <h2 className="text-balance text-3xl font-semibold tracking-tight text-white-900 sm:text-6xl">
-              <span className='underline'>Premium</span> Products Through <span className='underline'>Premium</span> Ways
+              <span className="underline">Premium</span> Products Through{" "}
+              <span className="underline">Premium</span> Ways
             </h2>
             <p className="mt-6 text-lg leading-8 text-white-600">
-              Experience the best products curated just for you. Unlock premium features and enjoy an exclusive experience.
+              Experience the best products curated just for you. Unlock premium
+              features and enjoy an exclusive experience.
             </p>
           </div>
         </div>
       </div>
-      </div>
-  )
+    </div>
+  );
 }
