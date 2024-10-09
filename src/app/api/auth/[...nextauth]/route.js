@@ -14,11 +14,11 @@ const authOptions = {
     login: '/auth/login', // Custom error page
   },
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn() {
       // You can customize the signIn logic here if needed
       return true; // Return true to allow sign in
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       // Ensure redirect to baseUrl after login
       return baseUrl;
     },

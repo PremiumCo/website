@@ -6,10 +6,6 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import {
   Bars3Icon,
   XMarkIcon,
-  ArrowPathIcon,
-  CloudArrowUpIcon,
-  FingerPrintIcon,
-  LockClosedIcon,
 } from "@heroicons/react/24/outline";
 import AnimatedGridPattern from "./components/ui/animated-grid-pattern";
 import {
