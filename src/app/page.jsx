@@ -3,10 +3,7 @@
 import { useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Dialog, DialogPanel } from "@headlessui/react";
-import {
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import AnimatedGridPattern from "./components/ui/animated-grid-pattern";
 import {
   DropdownMenu,
@@ -30,7 +27,7 @@ export default function Example() {
   const { data: session } = useSession(); // Use NextAuth session
 
   return (
-    <div className="bg-gray relative">
+    <div className="bg-gray-900 relative">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           aria-label="Global"
@@ -61,7 +58,7 @@ export default function Example() {
               <a
                 key={item.name}
                 href={item.href}
-                className="text-sm font-semibold leading-6 text-white-900"
+                className="text-sm font-semibold leading-6 text-white"
               >
                 {item.name}
               </a>
@@ -93,7 +90,7 @@ export default function Example() {
             ) : (
               <a
                 href="/login"
-                className="text-sm font-semibold leading-6 text-white-900"
+                className="text-sm font-semibold leading-6 text-white"
               >
                 Log in <span aria-hidden="true">&rarr;</span>
               </a>
@@ -110,16 +107,11 @@ export default function Example() {
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Premium Platforming</span>
-                <img
-                  alt=""
-                  src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600"
-                  className="h-8 w-auto"
-                />
               </a>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="-m-2.5 rounded-md p-2.5 text-gray-700"
+                className="-m-2.5 rounded-md p-2.5 text-white"
               >
                 <span className="sr-only">Close menu</span>
                 <XMarkIcon aria-hidden="true" className="h-6 w-6" />
@@ -132,7 +124,7 @@ export default function Example() {
                     <a
                       key={item.name}
                       href={item.href}
-                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white-900 hover:bg-gray-50"
+                      className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-white hover:bg-gray-50"
                     >
                       {item.name}
                     </a>
@@ -181,13 +173,6 @@ export default function Example() {
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         >
-          <div
-            style={{
-              clipPath:
-                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
-            }}
-            className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
-          />
         </div>
 
         {/* Add the Animated Grid Pattern here */}
@@ -205,17 +190,32 @@ export default function Example() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 relative z-10">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center">
-            <h2 className="text-balance text-3xl font-semibold tracking-tight text-white-900 sm:text-6xl">
-              <span className="underline">Premium</span> Products Through{" "}
-              <span className="underline">Premium</span> Ways
+            <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+              The ultimate platform for premium content.
             </h2>
-            <p className="mt-6 text-lg leading-8 text-white-600">
-              Experience the best products curated just for you. Unlock premium
-              features and enjoy an exclusive experience.
+            <p className="mt-6 text-lg leading-8 text-gray-300">
+              Join our community and enjoy exclusive content tailored just for
+              you.
             </p>
+            <div className="mt-8 flex gap-x-4 justify-center">
+              <a
+                href="#"
+                className="inline-block rounded-lg bg-gray-950 px-3.5 py-1.5 text-base font-semibold leading-6 text-white shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+              >
+                Get Started <span aria-hidden="true">→</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
+
+      <footer className="bg-gray-900 py-6">
+        <div className="max-w-7xl mx-auto text-center">
+          <p className="text-sm text-gray-400">
+            &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }
