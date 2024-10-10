@@ -37,7 +37,7 @@ const authOptions = {
     async redirect({ url, baseUrl }) {
       // Ensure redirect to the desired URL after login
       // You can customize this logic based on your application flow
-      return url.startsWith(baseUrl) ? url : baseUrl;
+      return baseUrl + "/";
     },
   },
 };
