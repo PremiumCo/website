@@ -35,7 +35,7 @@ export default function Example() {
         >
           <div className="flex lg:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">Premium Platforming</span>
               <img
                 alt="Company Logo"
                 src="https://cdn.discordapp.com/attachments/1292638781740159078/1293409903255228436/Premium_Platforming_LOGO_WHITE.png?ex=67074557&is=6705f3d7&hm=0a47b46e5e4a031372ca7879718de63fe13215a9b646d210473588550c210b4a&"
@@ -103,7 +103,7 @@ export default function Example() {
           className="lg:hidden"
         >
           <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Premium Platforming</span>
@@ -212,7 +212,7 @@ export default function Example() {
       <footer className="bg-gray-900 py-6">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} Your Company. All rights reserved.
+            &copy; {new Date().getFullYear()} Premium Platforming. All rights reserved.
           </p>
         </div>
       </footer>
