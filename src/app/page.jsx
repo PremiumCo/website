@@ -32,13 +32,13 @@ export default function Example() {
     ? [
         {
           text: `Welcome, ${session.user.name}`,
-          className: "text-gray-600",
+          className: "text-gray-500",
         },
       ]
     : [];
 
   return (
-    <div className="bg-gray-900 relative">
+    <div className="bg-black text-white min-h relative">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           aria-label="Global"
@@ -58,7 +58,7 @@ export default function Example() {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(true)}
-              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white-700"
+              className="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-white"
             >
               <span className="sr-only">Open main menu</span>
               <Bars3Icon aria-hidden="true" className="h-6 w-6" />
@@ -114,7 +114,7 @@ export default function Example() {
           className="lg:hidden"
         >
           <div className="fixed inset-0 z-50" />
-          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
+          <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-950 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
                 <span className="sr-only">Premium Platforming</span>
@@ -185,10 +185,9 @@ export default function Example() {
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
         ></div>
 
-        {/* Add the Animated Grid Pattern here */}
         <AnimatedGridPattern
-          numSquares={30}
-          maxOpacity={0.4}
+          numSquares={50}
+          maxOpacity={0.9}
           duration={2}
           repeatDelay={1}
           className={cn(
@@ -222,7 +221,7 @@ export default function Example() {
         </div>
       </div>
 
-      <footer className="bg-gray-900 py-6">
+      <footer className="bg-black py-6">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-sm text-gray-400">
             &copy; {new Date().getFullYear()} Premium Platforming. All rights
