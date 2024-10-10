@@ -1,5 +1,6 @@
 "use client";
-
+import Image from 'next/image'
+import logo from '../public/logo.png'
 import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Dialog, DialogPanel } from "@headlessui/react";
@@ -72,9 +73,9 @@ export default function StaffPage() {
           <div className="flex lg:flex-1">
             <a href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Premium Platforming</span>
-              <img
+              <Image
                 alt="Premium Platforming"
-                src="https://us-east-1.tixte.net/uploads/us.orbit.tf/Premium_Platforming_LOGO_WHITE.png"
+                src={logo}
                 className="h-14 w-auto"
               />
             </a>
