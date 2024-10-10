@@ -34,7 +34,7 @@ const authOptions = {
       // You can customize the signIn logic here if needed
       return true; // Return true to allow sign in
     },
-    async redirect({ url, baseUrl }) {
+    async redirect({ baseUrl }) {
       // Ensure redirect to the desired URL after login
       // You can customize this logic based on your application flow
       return baseUrl + "/";
