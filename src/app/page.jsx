@@ -18,10 +18,10 @@ import {
 import { cn } from "./lib/utils";
 
 const navigation = [
-  { name: "Home", href: "#" },
-  { name: "Careers", href: "#" },
-  { name: "Products", href: "#" },
-  { name: "Company", href: "#" },
+  { name: "Home", href: "/" },
+  { name: "Careers", href: "/careers" },
+  { name: "Products", href: "/#" },
+  { name: "Company", href: "/staff" },
 ];
 
 export default function Example() {
@@ -45,11 +45,11 @@ export default function Example() {
           className="flex items-center justify-between p-6 lg:px-8"
         >
           <div className="flex lg:flex-1">
-            <a href="#" className="-m-1.5 p-1.5">
+            <a href="/" className="-m-1.5 p-1.5">
               <span className="sr-only">Premium Platforming</span>
               <img
-                alt="Company Logo"
-                src="https://cdn.discordapp.com/attachments/1292638781740159078/1293409903255228436/Premium_Platforming_LOGO_WHITE.png?ex=67074557&is=6705f3d7&hm=0a47b46e5e4a031372ca7879718de63fe13215a9b646d210473588550c210b4a&"
+                alt="Premium Platforming"
+                src="https://us-east-1.tixte.net/uploads/us.orbit.tf/Premium_Platforming_LOGO_WHITE.png"
                 className="h-14 w-auto"
               />
             </a>
