@@ -5,6 +5,8 @@ import { useSession, signOut } from "next-auth/react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import AnimatedGridPattern from "./components/ui/animated-grid-pattern";
+import { TypewriterEffectSmooth } from "./components/ui/typewriter-effect";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,6 +27,15 @@ const navigation = [
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session } = useSession(); // Use NextAuth session
+
+  const words = session
+    ? [
+        {
+          text: `Welcome, ${session.user.name}`,
+          className: "text-gray-600",
+        },
+      ]
+    : [];
 
   return (
     <div className="bg-gray-900 relative">
@@ -137,7 +148,7 @@ export default function Example() {
                         <img
                           src={session.user.image}
                           alt="User Profile"
-                          className="h-6 w-6 rounded-full"
+                          className="h-8 w-8 rounded-full"
                         />
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
@@ -172,8 +183,7 @@ export default function Example() {
         <div
           aria-hidden="true"
           className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
-        >
-        </div>
+        ></div>
 
         {/* Add the Animated Grid Pattern here */}
         <AnimatedGridPattern
@@ -189,7 +199,10 @@ export default function Example() {
 
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 relative z-10">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
-          <div className="text-center">
+          <div className="text-center text-2xl">
+            {session && (
+              <TypewriterEffectSmooth words={words} />
+            )}
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               The ultimate platform for premium content.
             </h2>
@@ -212,7 +225,8 @@ export default function Example() {
       <footer className="bg-gray-900 py-6">
         <div className="max-w-7xl mx-auto text-center">
           <p className="text-sm text-gray-400">
-            &copy; {new Date().getFullYear()} Premium Platforming. All rights reserved.
+            &copy; {new Date().getFullYear()} Premium Platforming. All rights
+            reserved.
           </p>
         </div>
       </footer>
