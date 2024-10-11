@@ -7,7 +7,6 @@ import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import AnimatedGridPattern from "../components/ui/animated-grid-pattern"; // Assume this component is defined
 import { cn } from "../lib/utils"; // Utility function for class names
-import Footer from "../components/ui/footer";
 
 import {
   DropdownMenu,
@@ -28,9 +27,7 @@ const navigation = [
 export default function StaffPage() {
   const [roles, setRoles] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { data: session, status } = useSession(); // Use NextAuth session with status
-  const [loadingRoles, setLoadingRoles] = useState(true); // Loading state for roles
-  const [error, setError] = useState(null); // Error state for roles
+  const { data: session } = useSession(); // Use NextAuth session with status
 
   useEffect(() => {
     const fetchRoles = async () => {

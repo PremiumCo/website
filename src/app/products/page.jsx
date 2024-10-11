@@ -1,7 +1,6 @@
 // pages/index.js
 "use client";
 import Head from 'next/head';
-import ThreeScene from '../components/ThreeScene';
 import AnimatedGridPattern from "../components/ui/animated-grid-pattern";
 import { cn } from "../lib/utils";
 
