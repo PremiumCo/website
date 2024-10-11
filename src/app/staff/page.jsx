@@ -1,12 +1,13 @@
 "use client";
-import Image from 'next/image'
-import logo from '../public/logo.png'
+import Image from "next/image";
+import logo from "../public/logo.png";
 import { useEffect, useState } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import AnimatedGridPattern from "../components/ui/animated-grid-pattern"; // Assume this component is defined
 import { cn } from "../lib/utils"; // Utility function for class names
+import Footer from "../components/ui/footer";
 
 import {
   DropdownMenu,
@@ -18,11 +19,11 @@ import {
 } from "../components/ui/dropdown-menu";
 
 const navigation = [
-    { name: "Home", href: "/" },
-    { name: "Careers", href: "/careers" },
-    { name: "Products", href: "/#" },
-    { name: "Company", href: "/staff" },
-  ];
+  { name: "Home", href: "/" },
+  { name: "Careers", href: "/careers" },
+  { name: "Products", href: "/#" },
+  { name: "Company", href: "/staff" },
+];
 
 export default function StaffPage() {
   const [roles, setRoles] = useState([]);
@@ -35,7 +36,7 @@ export default function StaffPage() {
     const fetchRoles = async () => {
       setLoadingRoles(true); // Start loading
       try {
-        const response = await fetch(`https://api.premiumplatforming.com/roles`);
+        const response = await fetch(`http://localhost:5000/roles`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -53,18 +54,8 @@ export default function StaffPage() {
     fetchRoles();
   }, []);
 
-  // Handle loading state
-  if (status === "loading" || loadingRoles) {
-    return <div className="text-white">Loading...</div>; // Loading indicator
-  }
-
-  // Handle error state
-  if (error) {
-    return <div className="text-red-500">Error: {error}</div>; // Error message
-  }
-
   return (
-    <div className="bg-black text-white min-h-screen relative">
+    <div className="bg-black text-white overflow-hidden relative">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           aria-label="Global"
@@ -106,7 +97,7 @@ export default function StaffPage() {
               <DropdownMenu>
                 <DropdownMenuTrigger>
                   <img
-                    src={session.user.image || "/fallback-image.png"} // Fallback image if user image is not available
+                    src={session.user.image || "/fallback-image.png"}
                     alt="User Profile"
                     className="h-9 w-9 rounded-full cursor-pointer"
                   />
@@ -205,10 +196,9 @@ export default function StaffPage() {
         </Dialog>
       </header>
 
-      {/* Background Pattern */}
       <div className="relative isolate px-6 pt-6 lg:px-8">
         <AnimatedGridPattern
-          numSquares={50}
+          numSquares={70}
           maxOpacity={0.9}
           duration={2}
           repeatDelay={1}
@@ -218,17 +208,25 @@ export default function StaffPage() {
           )}
         />
 
-        {/* Main Content */}
-        <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:py-32 relative z-10 text-center">
+        <div className="mx-auto max-w-2xl py-8 sm:py-12 lg:py-16 relative z-10 text-center">
           <h1 className="text-3xl font-bold tracking-tight text-white sm:text-6xl">
             Premium Platforming Staff
           </h1>
+          <p className="text-lg text-gray-300 mt-4">
+            Welcome to the Premium Platforming staff page! Here you can view all
+            roles and members. Want to join the page?
+          </p>
+          <a
+            href="/login"
+            className="inline-block rounded-lg bg-gray-900 px-3.5 py-1.5 text-base font-semibold leading-6 text-white shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20 mt-8"  // Adjust margin here
+            >
+            Apply Here <span aria-hidden="true">→</span>
+          </a>
         </div>
 
-        {/* Staff Roles List */}
         <div className="overflow-x-auto mt-4">
           <table className="min-w-full divide-y divide-gray-700 rounded-lg overflow-hidden">
-            <thead className="bg-gray-950">
+            <thead className="bg-black">
               <tr>
                 <th className="px-4 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                   Avatar
@@ -258,12 +256,15 @@ export default function StaffPage() {
                     {role.displayName}
                   </td>
                   <td className="px-4 py-4 whitespace-nowrap text-sm text-gray-300">
-                    <div className="flex flex-wrap space-x-1">
+                    <div className="flex flex-wrap gap-2">
                       {role.roles.map((r) => (
                         <span
                           key={r.id}
-                          className="inline-flex items-center px-2 py-1 text-xs font-medium text-white rounded-full"
-                          style={{ backgroundColor: r.color }} // Assuming each role has a color property
+                          className="inline-flex items-center px-3 py-1 text-xs font-medium text-white rounded-full border-2"
+                          style={{
+                            backgroundColor: "#000000",
+                            borderColor: r.color,
+                          }}
                         >
                           {r.name}
                         </span>
@@ -275,6 +276,14 @@ export default function StaffPage() {
             </tbody>
           </table>
         </div>
+        <footer className="bg-gray-950 py-6">
+          <div className="max-w-7xl mx-auto text-center">
+            <p className="text-sm text-gray-400">
+              &copy; {new Date().getFullYear()} Premium Platforming. All rights
+              reserved.
+            </p>
+          </div>
+        </footer>
       </div>
     </div>
   );

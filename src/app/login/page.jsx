@@ -13,12 +13,14 @@ export default function Login() {
   };
 
   return (
-    <div className="flex items-center justify-center h-screen bg-gray-900">
-      <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-        <h1 className="text-2xl font-bold text-center text-gray-800 mb-6">Login</h1>
+    <div className="flex items-center justify-center h-screen bg-black">
+      <div className="bg-gray-800 rounded-lg shadow-lg p-8 max-w-md w-full">
+        <h1 className="text-2xl font-bold text-center text-white mb-6">
+          Login
+        </h1>
         <button
           onClick={handleLogin}
-          className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover:bg-blue-600 transition duration-200"
+          className="w-full bg-blue-500 text-white font-semibold py-2 rounded-md hover-bg-blue-900"
         >
           Sign in with Discord
         </button>

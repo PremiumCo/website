@@ -1,9 +1,11 @@
-"use client"; // This makes the component a Client Component
-
 import localFont from "next/font/local";
 import "./globals.css";
-import { SessionProvider } from "next-auth/react";
-import { AnimatePresence, motion } from "framer-motion"; // Import framer-motion
+import ClientProvider from "./ClientProvider"; // Import ClientProvider
+
+export const metadata = {
+  title: 'Premium Platforming',
+  description: 'Premium Platforming Est. 2021',
+}
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -17,41 +19,14 @@ const geistMono = localFont({
   weight: "100 900",
 });
 
-// Define animation variants
-const variants = {
-  initial: {
-    opacity: 0,
-    y: 50,
-  },
-  enter: {
-    opacity: 1,
-    y: 0,
-  },
-  exit: {
-    opacity: 0,
-    y: -50,
-  },
-};
-
 export default function RootLayout({ children }) {
   return (
-    <SessionProvider>
+    <ClientProvider>
       <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <AnimatePresence mode="wait"> {/* Ensure proper exit before entering */}
-            <motion.div
-              key={children.key} // Use a unique key to trigger reanimation
-              initial="initial"
-              animate="enter"
-              exit="exit"
-              variants={variants}
-              transition={{ duration: 0.5 }} // Adjust duration as needed
-            >
-              {children}
-            </motion.div>
-          </AnimatePresence>
+          {children}
         </body>
       </html>
-    </SessionProvider>
+    </ClientProvider>
   );
 }

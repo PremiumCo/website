@@ -40,7 +40,7 @@ export default function Example() {
     : [];
 
   return (
-    <div className="bg-black text-white min-h relative">
+    <div className="bg-black text-white overflow-hidden min-h relative">
       <header className="absolute inset-x-0 top-0 z-50">
         <nav
           aria-label="Global"
@@ -213,7 +213,7 @@ export default function Example() {
             </p>
             <div className="mt-8 flex gap-x-4 justify-center">
               <a
-                href="#"
+                href="/login"
                 className="inline-block rounded-lg bg-gray-950 px-3.5 py-1.5 text-base font-semibold leading-6 text-white shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
               >
                 Get Started <span aria-hidden="true">→</span>
