@@ -27,7 +27,7 @@ const navigation = [
 export default function StaffPage() {
   const [roles, setRoles] = useState([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [loadingRoles, setLoadingRoles] = useState(false);
+  const [, setLoadingRoles] = useState(false);
   const { data: session } = useSession(); // Use NextAuth session with status
 
   useEffect(() => {
