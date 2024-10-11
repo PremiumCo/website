@@ -1,9 +1,9 @@
 "use client";
 
-import Image from 'next/image'
-import logo from './public/logo.png'
+import Image from "next/image";
+import logo from "./public/logo.png";
 import { useState } from "react";
-import { useSession, signOut } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 import { Dialog, DialogPanel } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import AnimatedGridPattern from "./components/ui/animated-grid-pattern";
@@ -29,6 +29,14 @@ const navigation = [
 export default function Example() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { data: session } = useSession(); // Use NextAuth session
+
+  const handleLogin = async () => {
+    try {
+      await signIn("discord");
+    } catch (error) {
+      console.error("Login failed", error);
+    }
+  };
 
   const words = session
     ? [
@@ -90,23 +98,18 @@ export default function Example() {
                 <DropdownMenuContent>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Billing</DropdownMenuItem>
-                  <DropdownMenuItem>Team</DropdownMenuItem>
-                  <DropdownMenuItem>Subscription</DropdownMenuItem>
-                  <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => signOut()}>
                     Logout
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             ) : (
-              <a
-                href="/login"
+              <button
+                onClick={handleLogin} // Call handleLogin on click
                 className="text-sm font-semibold leading-6 text-white"
               >
                 Log in <span aria-hidden="true">&rarr;</span>
-              </a>
+              </button>
             )}
           </div>
         </nav>
@@ -156,23 +159,18 @@ export default function Example() {
                       <DropdownMenuContent>
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                        <DropdownMenuItem>Billing</DropdownMenuItem>
-                        <DropdownMenuItem>Team</DropdownMenuItem>
-                        <DropdownMenuItem>Subscription</DropdownMenuItem>
-                        <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => signOut()}>
                           Logout
                         </DropdownMenuItem>
                       </DropdownMenuContent>
                     </DropdownMenu>
                   ) : (
-                    <a
-                      href="/login"
-                      className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50"
+                    <button
+                      onClick={handleLogin} // Call handleLogin when clicked
+                      className="text-sm font-semibold leading-6 text-white"
                     >
-                      Log in
-                    </a>
+                      Log in <span aria-hidden="true">&rarr;</span>
+                    </button>
                   )}
                 </div>
               </div>
@@ -201,9 +199,7 @@ export default function Example() {
         <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 relative z-10">
           <div className="hidden sm:mb-8 sm:flex sm:justify-center"></div>
           <div className="text-center text-2xl">
-            {session && (
-              <TypewriterEffectSmooth words={words} />
-            )}
+            {session && <TypewriterEffectSmooth words={words} />}
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
               The ultimate platform for premium content.
             </h2>
@@ -212,12 +208,12 @@ export default function Example() {
               you.
             </p>
             <div className="mt-8 flex gap-x-4 justify-center">
-              <a
-                href="/login"
+              <button
+                onClick={handleLogin} // Call handleLogin when clicked
                 className="inline-block rounded-lg bg-gray-950 px-3.5 py-1.5 text-base font-semibold leading-6 text-white shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
               >
                 Get Started <span aria-hidden="true">→</span>
-              </a>
+              </button>
             </div>
           </div>
         </div>

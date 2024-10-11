@@ -33,7 +33,7 @@ export default function StaffPage() {
     const fetchRoles = async () => {
       setLoadingRoles(true); // Start loading
       try {
-        const response = await fetch(`http://localhost:5000/roles`);
+        const response = await fetch(`https://api.premiumplatforming.com/roles`);
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -102,11 +102,6 @@ export default function StaffPage() {
                 <DropdownMenuContent>
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
                   <DropdownMenuSeparator />
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuItem>Billing</DropdownMenuItem>
-                  <DropdownMenuItem>Team</DropdownMenuItem>
-                  <DropdownMenuItem>Subscription</DropdownMenuItem>
-                  <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => signOut()}>
                     Logout
                   </DropdownMenuItem>
@@ -167,11 +162,6 @@ export default function StaffPage() {
                       </DropdownMenuTrigger>
                       <DropdownMenuContent>
                         <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>Profile</DropdownMenuItem>
-                        <DropdownMenuItem>Billing</DropdownMenuItem>
-                        <DropdownMenuItem>Team</DropdownMenuItem>
-                        <DropdownMenuItem>Subscription</DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem onClick={() => signOut()}>
                           Logout

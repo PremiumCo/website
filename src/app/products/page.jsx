@@ -17,7 +17,7 @@ const Home = () => {
         <h2 className="text-2xl text-white mb-8 drop-shadow-md">We’re building something awesome!</h2>
         <h2 className="text-2xl text-white mb-8 drop-shadow-md">(Mike is sweeping for us)</h2>
         <img
-          className="max-w-md h-auto rounded-lg shadow-lg transform transition-transform hover:scale-105"
+          className="max-w-md h-auto rounded-lg shadow-lg transform transition-transform hover:scale-120"
           src="https://cdn.discordapp.com/attachments/1292638781740159078/1293841989560696863/image.png?ex=67098080&is=67082f00&hm=155d9694ab4ad7f7d32d15268a40f61f1804eb619fcfd701e341b65e1466225c&"
           alt="Centered Image"
         />
