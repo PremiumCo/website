@@ -188,10 +188,10 @@ export default function Example() {
         ></div>
 
         <AnimatedGridPattern
-          numSquares={50}
+          numSquares={70}
           maxOpacity={0.9}
-          duration={2}
-          repeatDelay={1}
+          duration={1.5}
+          repeatDelay={0.6}
           className={cn(
             "[mask-image:radial-gradient(500px_circle_at_center,white,transparent)]",
             "inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
