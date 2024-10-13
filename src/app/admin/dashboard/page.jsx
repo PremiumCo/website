@@ -29,7 +29,7 @@ const AdminPage = () => {
                 console.log(`User ID: ${userId}`);
 
                 try {
-                    const response = await fetch(`http://localhost:5000/admin/check-roles?guildId=${guildId}&userId=${userId}`);
+                    const response = await fetch(`https://api.premiumplatforming.com/admin/check-roles?guildId=${guildId}&userId=${userId}`);
                     const data = await response.json();
                     console.log("Role check response:", data);
 
