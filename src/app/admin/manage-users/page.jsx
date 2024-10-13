@@ -1,0 +1,118 @@
+"use client"; // This makes the component a Client Component
+
+import { useEffect, useState } from "react";
+import { useSession, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation"; // Import useRouter for navigation
+import Navbar from "../../components/Navbar"; // Assuming you have a separate Navbar component
+import AnimatedGridPattern from "../../components/ui/animated-grid-pattern";
+
+const AdminPage = () => {
+    const { data: session, status } = useSession(); // Get session and status
+    const router = useRouter(); // Initialize the router
+    const [hasAccess, setHasAccess] = useState(false); // State to manage access
+    const guildId = '841760990637850675'; // Your Guild ID
+
+    useEffect(() => {
+        const checkUserRole = async () => {
+            console.log("Checking user role...");
+
+            // If user is not authenticated, redirect to home page
+            if (status === "unauthenticated") {
+                console.log("User is not authenticated, redirecting to home...");
+                router.push('/'); // Redirect to home page
+                return;
+            }
+
+            // Check if session is authenticated
+            if (status === "authenticated") {
+                const userId = session.user.id; // Get the user's Discord ID
+                console.log(`User ID: ${userId}`);
+
+                try {
+                    const response = await fetch(`https://api.premiumplatforming.com/admin/check-roles?guildId=${guildId}&userId=${userId}`);
+                    const data = await response.json();
+
+                    if (data.hasAccess) {
+                        setHasAccess(true);
+                    } else {
+                        console.log('Access denied, redirecting to home...');
+                        setTimeout(5000);
+                        router.push('/'); // Redirect to home page if access is denied
+                    }
+                } catch (error) {
+                    console.error('Error checking user role:', error);
+                    // Redirect to home page on error
+                    router.push('/');
+                }
+            }
+        };
+
+        checkUserRole();
+    }, [session, status]); // Run this effect when session or status changes
+
+    // If the user is authenticated but access is not confirmed, you could show a loading state here instead
+    if (status === "loading") {
+        return <div>Loading...</div>; // Optionally, show a loading indicator
+    }
+
+    return (
+        <div className="bg-black text-white overflow-hidden min-h-screen relative">
+            <header className="absolute inset-x-0 top-0 z-50">
+                <Navbar session={session} /> {/* Use your Navbar component here */}
+            </header>
+
+            <div className="relative isolate px-6 pt-14 lg:px-8">
+                <AnimatedGridPattern
+                    numSquares={50}
+                    maxOpacity={0.5}
+                    duration={3.5}
+                    repeatDelay={0.9}
+                    className="inset-x-0 inset-y-[-30%] h-[200%] skew-y-12"
+                />
+
+                <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56 relative z-10">
+                    <div className="text-center text-2xl">
+                        <h2 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                            Admin Dashboard
+                        </h2>
+                        {hasAccess ? (
+                            <p className="mt-6 text-lg leading-8 text-gray-300">
+                                Welcome to the admin area! You have the necessary permissions.
+                            </p>
+                        ) : (
+                            <p className="mt-6 text-lg leading-8 text-gray-300">
+                                Access denied. You do not have the required permissions to view this page.
+                            </p>
+                        )}
+                        <div className="mt-8 flex gap-x-4 justify-center">
+                            {hasAccess && (
+                                <button
+                                    onClick={() => router.push('/admin/manage-users')} // Example for navigating to user management
+                                    className="inline-block rounded-lg bg-gray-950 px-3.5 py-1.5 text-base font-semibold leading-6 text-white shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                                >
+                                    Manage Users <span aria-hidden="true">→</span>
+                                </button>
+                            )}
+                            <button
+                                onClick={() => signOut()}
+                                className="inline-block rounded-lg bg-red-600 px-3.5 py-1.5 text-base font-semibold leading-6 text-white shadow-sm ring-1 ring-gray-900/10 hover:ring-gray-900/20"
+                            >
+                                Log out <span aria-hidden="true">→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer className="bg-black py-6">
+                <div className="max-w-7xl mx-auto text-center">
+                    <p className="text-sm text-gray-400">
+                        &copy; {new Date().getFullYear()} Premium Platforming. All rights reserved.
+                    </p>
+                </div>
+            </footer>
+        </div>
+    );
+};
+
+export default AdminPage;

@@ -31,7 +31,6 @@ const authOptions = {
     async session({ session, token }) {
       session.user.id = token.sub || token.id; // Store Discord user ID in the session
       session.accessToken = token.accessToken; // Pass the access token to the session
-      console.log("Session Object:", session); // Debugging session object
       return session;
     },
     async signIn({ account }) {
