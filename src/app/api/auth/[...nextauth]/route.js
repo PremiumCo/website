@@ -7,42 +7,47 @@ const authOptions = {
     DiscordProvider({
       clientId: process.env.DISCORD_CLIENT_ID,
       clientSecret: process.env.DISCORD_CLIENT_SECRET,
+      authorization:
+        "https://discord.com/api/oauth2/authorize?scope=identify+email+guilds",
     }),
   ],
   pages: {
-    error: '/auth/error', // Custom error page
-    login: '/auth/login', // Custom login page
+    error: "/auth/error", // Custom error page
+    login: "/auth/login", // Custom login page
   },
   callbacks: {
-    async jwt({ token, user }) {
-      // Check if the user object exists (first login)
+    async jwt({ token, account, user }) {
+      if (account) {
+        // Save the access token and refresh token on first login
+        console.log("Access Token:", account.access_token); // Debugging access token
+        token.accessToken = account.access_token;
+        token.refreshToken = account.refresh_token; // Save refresh token for future use
+      }
       if (user) {
-        // You may need to ensure user.id is available here.
-        // Discord doesn't always return an id, you might need to check your user object.
-        token.id = user.id || user.userId; // Ensure the user ID is included
+        token.id = user.id || user.userId; // Ensure the user ID is stored correctly
       }
       return token;
     },
     async session({ session, token }) {
-      // Ensure user ID is set in the session
-      if (token.id) {
-        session.user.id = token.id; // Add the user ID to the session
-      }
+      session.user.id = token.sub || token.id; // Store Discord user ID in the session
+      session.accessToken = token.accessToken; // Pass the access token to the session
+      console.log("Session Object:", session); // Debugging session object
       return session;
     },
-    async signIn() {
-      // You can customize the signIn logic here if needed
-      return true; // Return true to allow sign in
+    async signIn({ account }) {
+      if (!account?.access_token) {
+        console.error("Missing access token");
+        return false; // Deny sign-in if token is missing
+      }
+      return true; // Allow sign-in if access token exists
     },
     async redirect({ baseUrl }) {
-      // Ensure redirect to the desired URL after login
-      // You can customize this logic based on your application flow
-      return baseUrl + "/";
+      return baseUrl + "/"; // Redirect to the home page after login
     },
   },
 };
 
 const handler = NextAuth(authOptions);
 
-// Exporting the handler for both GET and POST requests
+// Export handler for both GET and POST requests
 export { handler as GET, handler as POST };
