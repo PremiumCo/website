@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import logo from "../public/logo.png"; // Adjust the path as necessary
-import { useSession, signOut, signIn } from "next-auth/react";
+import { signOut, signIn } from "next-auth/react";
 
 const Navbar = ({ session }) => {
     return (
